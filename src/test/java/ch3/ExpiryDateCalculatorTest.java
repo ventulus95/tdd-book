@@ -23,6 +23,14 @@ public class ExpiryDateCalculatorTest {
 		LocalDate expiredDate = calculator.calculatorExpireDate(payAmount, billingDate);
 
 		assertEquals(LocalDate.of(2023, 11,24), expiredDate);
+
+		//새로운 예제를 넣어서 해당하는 함수의 엣지케이스를 늘려나감.
+		LocalDate billingDate2 = LocalDate.of(2023, 9, 24);
+
+		LocalDate expiredDate2 = calculator.calculatorExpireDate(payAmount, billingDate);
+
+		assertEquals(LocalDate.of(2023, 10,24), expiredDate2);
+
 	}
 
 }
