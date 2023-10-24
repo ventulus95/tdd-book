@@ -17,20 +17,21 @@ public class ExpiryDateCalculatorTest {
 	@Test
 	void 만원을_납부하면_한달_뒤가_만료일이_됨() {
 		LocalDate billingDate = LocalDate.of(2023, 10, 24);
+		LocalDate billingDate2 = LocalDate.of(2023, 9, 24);
 		int payAmount = 10000;
 
-		ExpiryDateCalculator calculator = new ExpiryDateCalculator();
-		LocalDate expiredDate = calculator.calculatorExpireDate(payAmount, billingDate);
-
-		assertEquals(LocalDate.of(2023, 11,24), expiredDate);
-
-		//새로운 예제를 넣어서 해당하는 함수의 엣지케이스를 늘려나감.
-		LocalDate billingDate2 = LocalDate.of(2023, 9, 24);
-
-		LocalDate expiredDate2 = calculator.calculatorExpireDate(payAmount, billingDate2);
-
-		assertEquals(LocalDate.of(2023, 10,24), expiredDate2);
+		assertExpiryDate(payAmount, billingDate, LocalDate.of(2023, 11, 24));
+		assertExpiryDate(payAmount, billingDate2, LocalDate.of(2023, 10, 24));
 
 	}
+
+	//이러면 예제를 만드는 경우때문에 강재로 중복이 발생함.  중복 발생? -> 오 리팩토링할거리!
+	private void assertExpiryDate(int payAmount, LocalDate billingDate, LocalDate resultDate) {
+		ExpiryDateCalculator calculator = new ExpiryDateCalculator();
+		LocalDate expiredDate = calculator.calculatorExpireDate(payAmount, billingDate);
+		assertEquals(resultDate, expiredDate);
+	}
+
+
 
 }
