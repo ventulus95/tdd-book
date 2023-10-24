@@ -32,6 +32,12 @@ public class ExpiryDateCalculatorTest {
 		assertEquals(resultDate, expiredDate);
 	}
 
+	//이제는 예외를 만들어서 처리하면됨.
+	@Test
+	void 납부일과_한달_뒤_일자가_같지_않음() {
+		assertExpiryDate(10000, LocalDate.of(2019, 1, 31), LocalDate.of(2019, 2, 28));
+		assertExpiryDate(10000, LocalDate.of(2019, 5, 31), LocalDate.of(2019, 6, 30));
+	}
 
 
 }
